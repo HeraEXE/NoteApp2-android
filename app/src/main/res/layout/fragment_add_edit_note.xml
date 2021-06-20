@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addeditnote.AddEditNoteFragment"
+    android:background="@color/teal_200">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:hint="Title"
+                android:background="@drawable/background_edit_text"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:inputType="textMultiLine"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="Priority level"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/priority_array"
+                android:background="@drawable/backgroind_spinner"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Content"
+                android:background="@drawable/background_edit_text"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:inputType="textMultiLine"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
