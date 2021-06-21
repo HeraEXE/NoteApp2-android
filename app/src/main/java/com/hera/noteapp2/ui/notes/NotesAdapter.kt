@@ -37,6 +37,7 @@ class NotesAdapter(
             tvTitle.text = note.title
             tvContent.text = note.content
             tvPriorityLevel.text = holder.priorityLevels[note.priorityLevel]
+            tvDate.text = note.dateFormatted
 
             layoutNote.setOnClickListener {
                 listener.onLayoutNoteClick(note, position)
@@ -48,10 +49,20 @@ class NotesAdapter(
     override fun getItemCount() = notes.size
 
 
+    fun updateListOfNotes() {
+        notes = listener.getAllNotes()
+    }
+
+
+    fun getLastPosition() = notes.size
+
+
 
     interface Listener {
 
+
         fun getAllNotes(): List<Note>
+
 
         fun onLayoutNoteClick(note: Note, position: Int)
     }
