@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
@@ -76,11 +77,24 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
                 if (!validate(title, content)) return@apply
 
-                val note = Note(title, content, priorityLevel)
-                observerState = ObserverState.INSERT
-                viewModel.insert(note)
                 hideKeyboard(activity as NoteActivity)
-                findNavController().navigateUp()
+                AlertDialog
+                    .Builder(requireContext())
+                    .setCancelable(false)
+                    .setTitle("New note")
+                    .setMessage("Add new note?")
+                    .setPositiveButton("Add") { dialog, _ ->
+                        val note = Note(title, content, priorityLevel)
+                        observerState = ObserverState.INSERT
+                        viewModel.insert(note)
+                        findNavController().navigateUp()
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
             }
             true
         }
@@ -92,22 +106,48 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
                 if (!validate(title, content)) return@apply
 
-                observerState = ObserverState.UPDATE
-                viewModel.update(args.note!!.copy(
-                    title = title,
-                    content = content,
-                    priorityLevel = priorityLevel
-                ))
                 hideKeyboard(activity as NoteActivity)
-                findNavController().navigateUp()
+                AlertDialog
+                    .Builder(requireContext())
+                    .setCancelable(false)
+                    .setTitle("Edit note")
+                    .setMessage("Are you sure you want to edit this note?")
+                    .setPositiveButton("Edit") { dialog, _ ->
+                        observerState = ObserverState.UPDATE
+                        viewModel.update(args.note!!.copy(
+                            title = title,
+                            content = content,
+                            priorityLevel = priorityLevel
+                        ))
+                        findNavController().navigateUp()
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
             }
             true
         }
         R.id.action_delete -> {
-            observerState = ObserverState.DELETE
-            viewModel.delete(args.note!!)
             hideKeyboard(activity as NoteActivity)
-            findNavController().navigateUp()
+            AlertDialog
+                .Builder(requireContext())
+                .setCancelable(false)
+                .setTitle("Edit task")
+                .setMessage("Are you sure you want to edit this task?")
+                .setPositiveButton("Edit") { dialog, _ ->
+                    observerState = ObserverState.DELETE
+                    viewModel.delete(args.note!!)
+                    findNavController().navigateUp()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
             true
         }
         else -> {
