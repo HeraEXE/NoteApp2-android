@@ -32,9 +32,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var adapter: NotesAdapter
 
-    private var notePosition = 0
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -55,7 +52,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
             recycler.adapter = adapter
 
             fabAddNote.setOnClickListener {
-                notePosition = adapter.getLastPosition()
+                viewModel.notePosition = adapter.getLastPosition()
                 val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment()
                 findNavController().navigate(action)
             }
@@ -65,13 +62,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
             adapter.updateListOfNotes()
             when (observerState) {
                 ObserverState.INSERT -> {
-                    adapter.notifyItemInserted(notePosition)
+                    adapter.notifyItemInserted(viewModel.notePosition)
                 }
                 ObserverState.UPDATE -> {
-                    adapter.notifyItemChanged(notePosition)
+                    adapter.notifyItemChanged(viewModel.notePosition)
                 }
                 ObserverState.DELETE -> {
-                    adapter.notifyItemRemoved(notePosition)
+                    adapter.notifyItemRemoved(viewModel.notePosition)
                 }
                 ObserverState.SORT -> {
                     adapter.notifyDataSetChanged()
@@ -133,7 +130,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
 
 
     override fun onLayoutNoteClick(note: Note, position: Int) {
-        notePosition = position
+        viewModel.notePosition = position
         val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment(note)
         findNavController().navigate(action)
     }
