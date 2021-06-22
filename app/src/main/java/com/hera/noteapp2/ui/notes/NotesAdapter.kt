@@ -3,6 +3,8 @@ package com.hera.noteapp2.ui.notes
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
@@ -13,12 +15,18 @@ class NotesAdapter(
     private val listener: Listener
 ) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
-    private var notes = listener.getAllNotes()
-
 
     inner class ViewHolder(val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
         val priorityLevels: Array<String> = context.resources.getStringArray(R.array.priority_array)
     }
+
+    private val differCallback = object: DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note) = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note) = oldItem == newItem
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
 
 
 
@@ -31,7 +39,7 @@ class NotesAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val note = notes[position]
+        val note = differ.currentList[position]
 
         holder.binding.apply {
             tvTitle.text = note.title
@@ -45,24 +53,10 @@ class NotesAdapter(
         }
     }
 
-
-    override fun getItemCount() = notes.size
-
-
-    fun updateListOfNotes() {
-        notes = listener.getAllNotes()
-    }
-
-
-    fun getLastPosition() = notes.size
-
+    override fun getItemCount() = differ.currentList.size
 
 
     interface Listener {
-
-
-        fun getAllNotes(): List<Note>
-
 
         fun onLayoutNoteClick(note: Note, position: Int)
     }

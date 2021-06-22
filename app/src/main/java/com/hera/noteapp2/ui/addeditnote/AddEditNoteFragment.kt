@@ -1,10 +1,7 @@
 package com.hera.noteapp2.ui.addeditnote
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -15,9 +12,7 @@ import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
 import com.hera.noteapp2.databinding.FragmentAddEditNoteBinding
 import com.hera.noteapp2.ui.NoteActivity
-import com.hera.noteapp2.ui.notes.observerState
 import com.hera.noteapp2.utils.AddEditStatus
-import com.hera.noteapp2.utils.ObserverState
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -77,7 +72,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
                 if (!validate(title, content)) return@apply
 
-                hideKeyboard(activity as NoteActivity)
+                (activity as NoteActivity).hideKeyboard(activity as NoteActivity)
                 AlertDialog
                     .Builder(requireContext())
                     .setCancelable(false)
@@ -85,7 +80,6 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
                     .setMessage("Add new note?")
                     .setPositiveButton("Add") { dialog, _ ->
                         val note = Note(title, content, priorityLevel)
-                        observerState = ObserverState.INSERT
                         viewModel.insert(note)
                         findNavController().navigateUp()
                         dialog.dismiss()
@@ -106,14 +100,13 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
                 if (!validate(title, content)) return@apply
 
-                hideKeyboard(activity as NoteActivity)
+                (activity as NoteActivity).hideKeyboard(activity as NoteActivity)
                 AlertDialog
                     .Builder(requireContext())
                     .setCancelable(false)
                     .setTitle("Edit note")
                     .setMessage("Are you sure you want to edit this note?")
                     .setPositiveButton("Edit") { dialog, _ ->
-                        observerState = ObserverState.UPDATE
                         viewModel.update(args.note!!.copy(
                             title = title,
                             content = content,
@@ -131,14 +124,13 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
             true
         }
         R.id.action_delete -> {
-            hideKeyboard(activity as NoteActivity)
+            (activity as NoteActivity).hideKeyboard(activity as NoteActivity)
             AlertDialog
                 .Builder(requireContext())
                 .setCancelable(false)
-                .setTitle("Edit task")
-                .setMessage("Are you sure you want to edit this task?")
-                .setPositiveButton("Edit") { dialog, _ ->
-                    observerState = ObserverState.DELETE
+                .setTitle("Delete note")
+                .setMessage("Are you sure you want to delete this note?")
+                .setPositiveButton("Delete") { dialog, _ ->
                     viewModel.delete(args.note!!)
                     findNavController().navigateUp()
                     dialog.dismiss()
@@ -174,16 +166,5 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
         }
 
         return isValid
-    }
-
-
-    private fun hideKeyboard(activity: Activity) {
-        val inputMethodManager =
-            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        val currentFocusedView = activity.currentFocus
-        currentFocusedView?.let {
-            inputMethodManager.hideSoftInputFromWindow(
-                currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-        }
     }
 }

@@ -19,26 +19,10 @@ class NotesViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    var notePosition = 0
 
     val databaseSort = MutableStateFlow(Sort.BY_DATE)
 
     val notes = databaseSort.flatMapLatest { sort ->
         repository.getAllNotes(sort)
     }.asLiveData()
-
-
-    fun insert(note: Note) = viewModelScope.launch {
-        repository.insert(note)
-    }
-
-
-    fun update(note: Note) = viewModelScope.launch {
-        repository.update(note)
-    }
-
-
-    fun delete(note: Note) = viewModelScope.launch {
-        repository.delete(note)
-    }
 }

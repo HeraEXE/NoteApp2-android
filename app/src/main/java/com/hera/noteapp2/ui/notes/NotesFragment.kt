@@ -1,8 +1,6 @@
 package com.hera.noteapp2.ui.notes
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -15,14 +13,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
 import com.hera.noteapp2.databinding.FragmentNotesBinding
-import com.hera.noteapp2.utils.ObserverState
-import com.hera.noteapp2.utils.PriorityLevel
 import com.hera.noteapp2.utils.Sort
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-
-
-var observerState = ObserverState.SORT
 
 
 @AndroidEntryPoint
@@ -41,8 +33,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Notes"
-
         adapter = NotesAdapter(requireContext(), this)
 
         binding = FragmentNotesBinding.bind(view)
@@ -52,29 +42,20 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
             recycler.adapter = adapter
 
             fabAddNote.setOnClickListener {
-                viewModel.notePosition = adapter.getLastPosition()
                 val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment()
                 findNavController().navigate(action)
             }
         }
 
-        viewModel.notes.observe(viewLifecycleOwner) {
-            adapter.updateListOfNotes()
-            when (observerState) {
-                ObserverState.INSERT -> {
-                    adapter.notifyItemInserted(viewModel.notePosition)
-                }
-                ObserverState.UPDATE -> {
-                    adapter.notifyItemChanged(viewModel.notePosition)
-                }
-                ObserverState.DELETE -> {
-                    adapter.notifyItemRemoved(viewModel.notePosition)
-                }
-                ObserverState.SORT -> {
-                    adapter.notifyDataSetChanged()
-                }
-            }
+        viewModel.notes.observe(viewLifecycleOwner) { notes ->
+            adapter.differ.submitList(notes)
         }
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity).supportActionBar?.title = "Notes"
     }
 
 
@@ -86,37 +67,30 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_only_high_level -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.HIGH_ONLY
             true
         }
         R.id.action_only_medium_level -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.MEDIUM_ONLY
             true
         }
         R.id.action_only_low_level -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.LOW_ONLY
             true
         }
         R.id.action_sort_by_date_new -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.BY_DATE_DESC
             true
         }
         R.id.action_sort_by_date_old -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.BY_DATE
             true
         }
         R.id.action_sort_by_high_level -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.BY_PRIORITY
             true
         }
         R.id.action_sort_by_low_level -> {
-            observerState = ObserverState.SORT
             viewModel.databaseSort.value = Sort.BY_PRIORITY_DESC
             true
         }
@@ -126,11 +100,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
     }
 
 
-    override fun getAllNotes() = viewModel.notes.value ?: listOf()
-
 
     override fun onLayoutNoteClick(note: Note, position: Int) {
-        viewModel.notePosition = position
         val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment(note)
         findNavController().navigate(action)
     }
