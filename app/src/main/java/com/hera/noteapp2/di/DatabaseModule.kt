@@ -3,8 +3,8 @@ package com.hera.noteapp2.di
 import android.content.Context
 import androidx.room.Room
 import com.hera.noteapp2.data.Repository
-import com.hera.noteapp2.data.inner.NoteDao
-import com.hera.noteapp2.data.inner.NoteDatabase
+import com.hera.noteapp2.data.room.NoteDao
+import com.hera.noteapp2.data.room.NoteDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

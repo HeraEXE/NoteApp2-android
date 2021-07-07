@@ -12,7 +12,8 @@ import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
 import com.hera.noteapp2.databinding.FragmentAddEditNoteBinding
 import com.hera.noteapp2.ui.NoteActivity
-import com.hera.noteapp2.utils.AddEditStatus
+import com.hera.noteapp2.util.AddEditStatus
+import com.hera.noteapp2.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -72,7 +73,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
                 if (!validate(title, content)) return@apply
 
-                (activity as NoteActivity).hideKeyboard(activity as NoteActivity)
+                (activity as AppCompatActivity).hideKeyboard()
                 AlertDialog
                     .Builder(requireContext())
                     .setCancelable(false)
@@ -100,7 +101,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
                 if (!validate(title, content)) return@apply
 
-                (activity as NoteActivity).hideKeyboard(activity as NoteActivity)
+                (activity as AppCompatActivity).hideKeyboard()
                 AlertDialog
                     .Builder(requireContext())
                     .setCancelable(false)
@@ -124,7 +125,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
             true
         }
         R.id.action_delete -> {
-            (activity as NoteActivity).hideKeyboard(activity as NoteActivity)
+            (activity as AppCompatActivity).hideKeyboard()
             AlertDialog
                 .Builder(requireContext())
                 .setCancelable(false)

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.addeditnote.AddEditNoteFragment"
-    android:background="@color/crimson_ua">
+    android:background="@color/grey_white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,16 +15,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/dark_blue"
+                android:text="Title:"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="8dp"/>
+
             <EditText
                 android:id="@+id/et_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:hint="Title"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="Enter the title"
                 android:textColor="@color/dark_grey"
                 android:textColorHint="@color/dark_grey_trans"
                 android:background="@drawable/background_edit_text"
-                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="8dp"
                 android:padding="2dp"
@@ -34,13 +44,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:text="Priority level"
-                android:textColor="@color/black" />
+                android:textColor="@color/dark_grey" />
 
             <Spinner
                 android:id="@+id/spinner_priority"
+                style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -48,16 +60,27 @@
                 android:background="@drawable/backgroind_spinner"
                 android:entries="@array/priority_array" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/dark_blue"
+                android:layout_marginHorizontal="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_marginTop="8dp"
+                android:text="Content:"/>
+
             <EditText
                 android:id="@+id/et_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="Enter the content"
                 android:textColor="@color/dark_grey"
                 android:textColorHint="@color/dark_grey_trans"
                 android:background="@drawable/background_edit_text"
                 android:textSize="16sp"
-                android:layout_margin="8dp"
+                android:layout_marginHorizontal="8dp"
                 android:padding="2dp"
                 android:inputType="textMultiLine"/>
 

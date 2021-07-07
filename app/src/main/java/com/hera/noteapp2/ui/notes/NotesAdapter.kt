@@ -16,48 +16,51 @@ class NotesAdapter(
 ) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
 
-    inner class ViewHolder(val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
-        val priorityLevels: Array<String> = context.resources.getStringArray(R.array.priority_array)
-    }
 
-    private val differCallback = object: DiffUtil.ItemCallback<Note>() {
-        override fun areItemsTheSame(oldItem: Note, newItem: Note) = oldItem.id == newItem.id
+    inner class ViewHolder(private val binding: ItemNoteBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
-        override fun areContentsTheSame(oldItem: Note, newItem: Note) = oldItem == newItem
-    }
+        private val priorityLevels: Array<String> = context.resources.getStringArray(R.array.priority_array)
 
-    val differ = AsyncListDiffer(this, differCallback)
+        fun bind(position: Int) {
+            val note = differ.currentList[position]
+            binding.apply {
+                tvTitle.text = note.title
+                tvContent.text = note.content
+                tvPriorityLevel.text = priorityLevels[note.priorityLevel]
+                tvDate.text = note.dateFormatted
 
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemNoteBinding
-            .inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return ViewHolder(binding)
-    }
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val note = differ.currentList[position]
-
-        holder.binding.apply {
-            tvTitle.text = note.title
-            tvContent.text = note.content
-            tvPriorityLevel.text = holder.priorityLevels[note.priorityLevel]
-            tvDate.text = note.dateFormatted
-
-            layoutNote.setOnClickListener {
-                listener.onLayoutNoteClick(note, position)
+                layoutNote.setOnClickListener {
+                    listener.onNoteClick(note, position)
+                }
             }
         }
     }
 
+
+
+    private val diffCallback = object: DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note) = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note) = oldItem == newItem
+    }
+    val differ = AsyncListDiffer(this, diffCallback)
+
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder(ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(position)
+
+
     override fun getItemCount() = differ.currentList.size
+
 
 
     interface Listener {
 
-        fun onLayoutNoteClick(note: Note, position: Int)
+        fun onNoteClick(note: Note, position: Int)
     }
 }

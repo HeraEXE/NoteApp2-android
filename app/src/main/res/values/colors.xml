@@ -3,12 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey_white">#FFDEE2E6</color>
+    <color name="grey_white_dark">#FFCED4DA</color>
     <color name="dark_grey">#FF212529</color>
     <color name="dark_grey_trans">#AF212529</color>
 
-    <color name="crimson">#FFC71F37</color>
-    <color name="crimson_ua">#FFA71E34</color>
-    <color name="antique_ruby">#FF85182A</color>
-    <color name="persian_plum">#FF641220</color>
-    <color name="dark_sienna">#FF370617</color>
+    <color name="blue">#FFbfdbf7</color>
+    <color name="dark_blue">#FF6096ba</color>
+    <color name="darker_blue">#FF6A84A1</color>
 </resources>

@@ -1,9 +1,8 @@
 package com.hera.noteapp2.data
 
 import com.hera.noteapp2.data.inner.Note
-import com.hera.noteapp2.data.inner.NoteDao
-import com.hera.noteapp2.utils.Sort
-import javax.inject.Inject
+import com.hera.noteapp2.data.room.NoteDao
+import com.hera.noteapp2.util.Sort
 
 class Repository(private val noteDao: NoteDao) {
 
@@ -13,5 +12,5 @@ class Repository(private val noteDao: NoteDao) {
 
     suspend fun delete(note: Note) = noteDao.delete(note)
 
-    fun getAllNotes(sort: Sort) = noteDao.getAllNotes(sort)
+    fun getAllNotes(show: Int, sort: Int) = noteDao.getAllNotes(show, sort)
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hera.noteapp2.data.Repository
 import com.hera.noteapp2.data.inner.Note
-import com.hera.noteapp2.utils.AddEditStatus
+import com.hera.noteapp2.util.AddEditStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

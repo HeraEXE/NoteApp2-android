@@ -2,15 +2,19 @@
     <!-- Base application theme. -->
     <style name="Theme.NoteApp2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/crimson</item>
-        <item name="colorPrimaryVariant">@color/crimson</item>
+        <item name="colorPrimary">@color/darker_blue</item>
+        <item name="colorPrimaryVariant">@color/darker_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/antique_ruby</item>
-        <item name="colorSecondaryVariant">@color/antique_ruby</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/grey_white_dark</item>
+        <item name="colorSecondaryVariant">@color/grey_white_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Spinner" parent="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 </resources>

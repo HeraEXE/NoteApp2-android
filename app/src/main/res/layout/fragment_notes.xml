@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey_white"
     tools:context=".ui.notes.NotesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        tools:listitem="@layout/item_note"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_note"
@@ -20,7 +22,9 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+        app:backgroundTint="@color/white"
+        android:foreground="@drawable/ripple_oval"
         app:maxImageSize="30dp"
-        app:tint="@color/white" />
+        app:tint="@color/dark_blue" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

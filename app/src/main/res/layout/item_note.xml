@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@drawable/background_item_note"
+    android:foreground="@drawable/ripple_item_note"
     android:padding="8dp">
 
     <TextView
@@ -16,6 +17,7 @@
         android:textAlignment="center"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_priority_level"
@@ -26,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-condensed-light"
         android:textColor="@color/dark_grey_trans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +39,8 @@
         android:id="@+id/tv_priority_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/crimson"
+        android:textColor="@color/dark_blue"
+        android:fontFamily="sans-serif-condensed"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,7 +51,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@color/antique_ruby"
+        android:textColor="@color/darker_blue"
+        android:fontFamily="sans-serif-condensed"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_content"

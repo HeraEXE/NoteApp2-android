@@ -1,4 +1,4 @@
-package com.hera.noteapp2.utils
+package com.hera.noteapp2.util
 
 enum class PriorityLevel(val level: Int) {
     HIGH(0),

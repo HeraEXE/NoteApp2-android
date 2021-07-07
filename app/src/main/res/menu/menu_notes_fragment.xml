@@ -21,6 +21,11 @@
                 android:id="@+id/action_only_low_level"
                 android:title="Low only"
                 app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/action_all_levels"
+                android:title="All"
+                app:showAsAction="never"/>
         </menu>
     </item>
 
