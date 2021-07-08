@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Note</string>
+    <string-array name="priority_array">
+        <item>Низкий</item>
+        <item>Средний</item>
+        <item>Высокий</item>
+    </string-array>
+    <string name="tv_add_edit_title">Заголовок:</string>
+    <string name="et_add_edit_title_hint">Введите заголовок</string>
+    <string name="tv_add_edit_priority_level">Уровень приоритета</string>
+    <string name="tv_add_edit_content">Содержание:</string>
+    <string name="et_add_edit_content_hint">Введите содержание</string>
+    <string name="action_save_title">Сохранить</string>
+    <string name="action_delete_title">Удалить</string>
+    <string name="action_search_title">Поиск</string>
+    <string name="collapsing_sort_by_title">Сортировать по</string>
+    <string name="collapsing_show_title">Показывать</string>
+    <string name="action_low_only_title">Только низкий</string>
+    <string name="action_medium_only_title">Только средний</string>
+    <string name="action_high_only_title">Только высокий</string>
+    <string name="action_all_title">Все</string>
+    <string name="action_newest_title">Сначала новые</string>
+    <string name="action_oldest_title">Сначала старые</string>
+    <string name="action_low_level_title">По возрастанию</string>
+    <string name="action_high_level_title">По убыванию</string>
+    <string name="toolbar_title_add">Создать</string>
+    <string name="toolbar_title_edit">Изменить</string>
+    <string name="toolbar_title_notes">Заметки</string>
+    <string name="alert_add_note_title">Новая заметка</string>
+    <string name="alert_add_note_message">Создать новую заметку?</string>
+    <string name="alert_add_note_positive">Создать</string>
+    <string name="alert_edit_note_title">Изменить заметку</string>
+    <string name="alert_edit_note_message">Вы уверены что хотите изменить заметку?</string>
+    <string name="alert_edit_note_positive">Изменить</string>
+    <string name="alert_delete_note_title">Удалить заметку</string>
+    <string name="alert_delete_note_message">Вы уверены что хотите удалить заметку?</string>
+    <string name="alert_delete_note_positive">Удалить</string>
+    <string name="alert_cancel">Отменить</string>
+    <string name="et_error_empty">пусто</string>
+    <string name="date_format">dd MMMM  yyyy</string>
+    <string name="search_query_hint">Искать…</string>
+</resources>

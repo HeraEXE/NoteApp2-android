@@ -36,9 +36,9 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAddEditNoteBinding.bind(view)
         if (viewModel.addEditStatus == AddEditStatus.ADD) {
-            (activity as AppCompatActivity).supportActionBar?.title = "Add"
+            (activity as AppCompatActivity).supportActionBar?.title = requireContext().getText(R.string.toolbar_title_add)
         } else {
-            (activity as AppCompatActivity).supportActionBar?.title = "Edit"
+            (activity as AppCompatActivity).supportActionBar?.title = requireContext().getText(R.string.toolbar_title_edit)
             binding.apply {
                 val note = args.note!!
                 etTitle.setText(note.title)
@@ -70,15 +70,15 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
                 AlertDialog
                     .Builder(requireContext())
                     .setCancelable(false)
-                    .setTitle("New note")
-                    .setMessage("Add new note?")
-                    .setPositiveButton("Add") { dialog, _ ->
+                    .setTitle(requireContext().getText(R.string.alert_add_note_title))
+                    .setMessage(requireContext().getText(R.string.alert_add_note_message))
+                    .setPositiveButton(requireContext().getText(R.string.alert_add_note_positive)) { dialog, _ ->
                         val note = Note(title, content, priorityLevel)
                         viewModel.insert(note)
                         findNavController().navigateUp()
                         dialog.dismiss()
                     }
-                    .setNegativeButton("Cancel") { dialog, _ ->
+                    .setNegativeButton(requireContext().getText(R.string.alert_cancel)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .create()
@@ -96,9 +96,9 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
                 AlertDialog
                     .Builder(requireContext())
                     .setCancelable(false)
-                    .setTitle("Edit note")
-                    .setMessage("Are you sure you want to edit this note?")
-                    .setPositiveButton("Edit") { dialog, _ ->
+                    .setTitle(requireContext().getText(R.string.alert_edit_note_title))
+                    .setMessage(requireContext().getText(R.string.alert_edit_note_message))
+                    .setPositiveButton(requireContext().getText(R.string.alert_edit_note_positive)) { dialog, _ ->
                         viewModel.update(args.note!!.copy(
                             title = title,
                             content = content,
@@ -107,7 +107,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
                         findNavController().navigateUp()
                         dialog.dismiss()
                     }
-                    .setNegativeButton("Cancel") { dialog, _ ->
+                    .setNegativeButton(requireContext().getText(R.string.alert_cancel)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .create()
@@ -120,14 +120,14 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
             AlertDialog
                 .Builder(requireContext())
                 .setCancelable(false)
-                .setTitle("Delete note")
-                .setMessage("Are you sure you want to delete this note?")
-                .setPositiveButton("Delete") { dialog, _ ->
+                .setTitle(requireContext().getText(R.string.alert_delete_note_title))
+                .setMessage(requireContext().getText(R.string.alert_delete_note_message))
+                .setPositiveButton(requireContext().getText(R.string.alert_delete_note_positive)) { dialog, _ ->
                     viewModel.delete(args.note!!)
                     findNavController().navigateUp()
                     dialog.dismiss()
                 }
-                .setNegativeButton("Cancel") { dialog, _ ->
+                .setNegativeButton(requireContext().getText(R.string.alert_cancel)) { dialog, _ ->
                     dialog.dismiss()
                 }
                 .create()
@@ -144,13 +144,13 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
         var isValid = true
         if (title.isEmpty()) {
             isValid = false
-            binding.etTitle.error = "empty"
+            binding.etTitle.error = requireContext().getText(R.string.et_error_empty)
         } else {
             binding.etTitle.error = null
         }
         if (content.isEmpty()) {
             isValid = false
-            binding.etContent.error = "empty"
+            binding.etContent.error = requireContext().getText(R.string.et_error_empty)
         } else {
             binding.etContent.error = null
         }

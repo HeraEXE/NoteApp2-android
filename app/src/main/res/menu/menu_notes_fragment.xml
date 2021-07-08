@@ -3,58 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        android:title="Search"
+        android:title="@string/action_search_title"
         android:icon="@drawable/ic_search"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
-
     <item
         android:id="@+id/collapsing_only"
-        android:title="Show"
+        android:title="@string/collapsing_show_title"
         android:icon="@drawable/ic_priority"
         app:showAsAction="ifRoom">
         <menu>
             <item
                 android:id="@+id/action_only_low_level"
-                android:title="Low only"
+                android:title="@string/action_low_only_title"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_only_medium_level"
-                android:title="Medium only"
+                android:title="@string/action_medium_only_title"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_only_high_level"
-                android:title="High only"
+                android:title="@string/action_high_only_title"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_all_levels"
-                android:title="All"
+                android:title="@string/action_all_title"
                 app:showAsAction="never"/>
         </menu>
     </item>
-
-
     <item
         android:id="@+id/collapsing_sort"
-        android:title="Sort by"
+        android:title="@string/collapsing_sort_by_title"
         android:icon="@drawable/ic_sort"
         app:showAsAction="ifRoom">
         <menu>
             <item
                 android:id="@+id/action_sort_by_date_new"
-                android:title="Newest"
+                android:title="@string/action_newest_title"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_sort_by_date_old"
-                android:title="Oldest"
+                android:title="@string/action_oldest_title"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_sort_by_low_level"
-                android:title="Low level"
+                android:title="@string/action_low_level_title"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_sort_by_high_level"
-                android:title="High level"
+                android:title="@string/action_high_level_title"
                 app:showAsAction="never"/>
         </menu>
     </item>

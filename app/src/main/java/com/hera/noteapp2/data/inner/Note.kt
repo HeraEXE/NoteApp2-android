@@ -18,15 +18,4 @@ data class Note(
     val date: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0
-) : Parcelable {
-
-    val dateFormatted: String get() = getFormattedDate(date)
-
-
-    private fun getFormattedDate(date: Long): String {
-        val formatter = SimpleDateFormat("MMMM dd  yyyy")
-        val cal = Calendar.getInstance()
-        cal.timeInMillis = date
-        return formatter.format(cal.time)
-    }
-}
+) : Parcelable

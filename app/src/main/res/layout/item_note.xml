@@ -9,7 +9,6 @@
     android:background="@drawable/background_item_note"
     android:foreground="@drawable/ripple_item_note"
     android:padding="8dp">
-
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
@@ -22,7 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_priority_level"
         tools:text="Title example" />
-
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
@@ -34,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         tools:text="Context example" />
-
     <TextView
         android:id="@+id/tv_priority_level"
         android:layout_width="wrap_content"
@@ -45,7 +42,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Level" />
-
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
@@ -57,5 +53,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_content"
         tools:text="datetime" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

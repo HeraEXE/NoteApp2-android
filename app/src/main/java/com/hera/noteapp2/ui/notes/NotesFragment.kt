@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
 import com.hera.noteapp2.databinding.FragmentNotesBinding
+import com.hera.noteapp2.util.Constants.KEY_SHOW
+import com.hera.noteapp2.util.Constants.KEY_SORT
+import com.hera.noteapp2.util.Constants.SHARED_PREFERENCES_NAME
 import com.hera.noteapp2.util.Constants.SHOW_ALL
 import com.hera.noteapp2.util.Constants.SHOW_HIGH
 import com.hera.noteapp2.util.Constants.SHOW_LOW
@@ -43,14 +46,15 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        sharedPreferences = (activity as AppCompatActivity).getSharedPreferences("settings", Context.MODE_PRIVATE)
+        sharedPreferences = (activity as AppCompatActivity)
+            .getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.show.value = sharedPreferences.getInt("show", SHOW_ALL)
-        viewModel.sort.value = sharedPreferences.getInt("sort", SORT_BY_DATE_DESC)
+        viewModel.show.value = sharedPreferences.getInt(KEY_SHOW, SHOW_ALL)
+        viewModel.sort.value = sharedPreferences.getInt(KEY_SORT, SORT_BY_DATE_DESC)
         adapter = NotesAdapter(requireContext(), this)
         _binding = FragmentNotesBinding.bind(view)
         binding.apply {
@@ -73,7 +77,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
 
     override fun onStart() {
         super.onStart()
-        (activity as AppCompatActivity).supportActionBar?.title = "Notes"
+        (activity as AppCompatActivity).supportActionBar?.title = requireContext().getText(R.string.toolbar_title_notes)
     }
 
 
@@ -82,6 +86,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
 
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
+        searchView.queryHint = requireContext().getText(R.string.search_query_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?) = false
 
@@ -98,42 +103,42 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_only_low_level -> {
             viewModel.show.value = SHOW_LOW
-            saveInSharedPreferences("show", SHOW_LOW)
+            saveInSharedPreferences(KEY_SHOW, SHOW_LOW)
             true
         }
         R.id.action_only_medium_level -> {
             viewModel.show.value = SHOW_MEDIUM
-            saveInSharedPreferences("show", SHOW_MEDIUM)
+            saveInSharedPreferences(KEY_SHOW, SHOW_MEDIUM)
             true
         }
         R.id.action_only_high_level -> {
             viewModel.show.value = SHOW_HIGH
-            saveInSharedPreferences("show", SHOW_HIGH)
+            saveInSharedPreferences(KEY_SHOW, SHOW_HIGH)
             true
         }
         R.id.action_all_levels -> {
             viewModel.show.value = SHOW_ALL
-            saveInSharedPreferences("show", SHOW_ALL)
+            saveInSharedPreferences(KEY_SHOW, SHOW_ALL)
             true
         }
         R.id.action_sort_by_date_new -> {
             viewModel.sort.value = SORT_BY_DATE_DESC
-            saveInSharedPreferences("sort", SORT_BY_DATE_DESC)
+            saveInSharedPreferences(KEY_SORT, SORT_BY_DATE_DESC)
             true
         }
         R.id.action_sort_by_date_old -> {
             viewModel.sort.value = SORT_BY_DATE
-            saveInSharedPreferences("sort", SORT_BY_DATE)
+            saveInSharedPreferences(KEY_SORT, SORT_BY_DATE)
             true
         }
         R.id.action_sort_by_low_level -> {
             viewModel.sort.value = SORT_BY_PRIORITY
-            saveInSharedPreferences("sort", SORT_BY_PRIORITY)
+            saveInSharedPreferences(KEY_SORT, SORT_BY_PRIORITY)
             true
         }
         R.id.action_sort_by_high_level -> {
             viewModel.sort.value = SORT_BY_PRIORITY_DESC
-            saveInSharedPreferences("sort", SORT_BY_PRIORITY_DESC)
+            saveInSharedPreferences(KEY_SORT, SORT_BY_PRIORITY_DESC)
             true
         }
         else -> {

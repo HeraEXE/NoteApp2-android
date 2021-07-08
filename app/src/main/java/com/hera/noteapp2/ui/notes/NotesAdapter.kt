@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
 import com.hera.noteapp2.databinding.ItemNoteBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotesAdapter(
     private val context: Context,
@@ -29,18 +31,27 @@ class NotesAdapter(
 
         private val priorityLevels: Array<String> = context.resources.getStringArray(R.array.priority_array)
 
+
         fun bind(position: Int) {
             val note = differ.currentList[position]
             binding.apply {
                 tvTitle.text = note.title
                 tvContent.text = note.content
                 tvPriorityLevel.text = priorityLevels[note.priorityLevel]
-                tvDate.text = note.dateFormatted
+                tvDate.text = getFormattedDate(note.date)
 
                 layoutNote.setOnClickListener {
                     listener.onNoteClick(note, position)
                 }
             }
+        }
+
+
+        private fun getFormattedDate(date: Long): String {
+            val formatter = SimpleDateFormat(context.getString(R.string.date_format))
+            val cal = Calendar.getInstance()
+            cal.timeInMillis = date
+            return formatter.format(cal.time)
         }
     }
 
