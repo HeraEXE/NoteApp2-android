@@ -5,8 +5,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Parcelize
 @Entity(tableName = "note_table")
