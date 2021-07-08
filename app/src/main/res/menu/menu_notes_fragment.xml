@@ -2,26 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <item
         android:id="@+id/collapsing_only"
         android:title="Show"
         android:icon="@drawable/ic_priority"
         app:showAsAction="ifRoom">
         <menu>
             <item
-                android:id="@+id/action_only_high_level"
-                android:title="High only"
+                android:id="@+id/action_only_low_level"
+                android:title="Low only"
                 app:showAsAction="never"/>
-
             <item
                 android:id="@+id/action_only_medium_level"
                 android:title="Medium only"
                 app:showAsAction="never"/>
-
             <item
-                android:id="@+id/action_only_low_level"
-                android:title="Low only"
+                android:id="@+id/action_only_high_level"
+                android:title="High only"
                 app:showAsAction="never"/>
-
             <item
                 android:id="@+id/action_all_levels"
                 android:title="All"
@@ -45,13 +49,12 @@
                 android:title="Oldest"
                 app:showAsAction="never"/>
             <item
-                android:id="@+id/action_sort_by_high_level"
-                android:title="High level"
-                app:showAsAction="never"/>
-
-            <item
                 android:id="@+id/action_sort_by_low_level"
                 android:title="Low level"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/action_sort_by_high_level"
+                android:title="High level"
                 app:showAsAction="never"/>
         </menu>
     </item>

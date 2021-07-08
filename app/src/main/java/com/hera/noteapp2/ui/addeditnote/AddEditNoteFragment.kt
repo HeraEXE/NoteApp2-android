@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import com.hera.noteapp2.R
 import com.hera.noteapp2.data.inner.Note
 import com.hera.noteapp2.databinding.FragmentAddEditNoteBinding
-import com.hera.noteapp2.ui.NoteActivity
 import com.hera.noteapp2.util.AddEditStatus
 import com.hera.noteapp2.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,10 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
     private val args: AddEditNoteFragmentArgs by navArgs()
-
     private val viewModel: AddEditNoteViewModel by viewModels()
-
-    private lateinit var binding: FragmentAddEditNoteBinding
+    private var _binding: FragmentAddEditNoteBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,14 +34,11 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentAddEditNoteBinding.bind(view)
-
+        _binding = FragmentAddEditNoteBinding.bind(view)
         if (viewModel.addEditStatus == AddEditStatus.ADD) {
             (activity as AppCompatActivity).supportActionBar?.title = "Add"
         } else {
             (activity as AppCompatActivity).supportActionBar?.title = "Edit"
-
             binding.apply {
                 val note = args.note!!
                 etTitle.setText(note.title)
@@ -70,9 +65,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
                 val title = etTitle.text.toString()
                 val content = etContent.text.toString()
                 val priorityLevel = spinnerPriority.selectedItemId.toInt()
-
                 if (!validate(title, content)) return@apply
-
                 (activity as AppCompatActivity).hideKeyboard()
                 AlertDialog
                     .Builder(requireContext())
@@ -98,9 +91,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
                 val title = etTitle.text.toString()
                 val content = etContent.text.toString()
                 val priorityLevel = spinnerPriority.selectedItemId.toInt()
-
                 if (!validate(title, content)) return@apply
-
                 (activity as AppCompatActivity).hideKeyboard()
                 AlertDialog
                     .Builder(requireContext())
@@ -151,21 +142,24 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
 
     private fun validate(title: String, content: String): Boolean {
         var isValid = true
-
         if (title.isEmpty()) {
             isValid = false
             binding.etTitle.error = "empty"
         } else {
             binding.etTitle.error = null
         }
-
         if (content.isEmpty()) {
             isValid = false
             binding.etContent.error = "empty"
         } else {
             binding.etContent.error = null
         }
-
         return isValid
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

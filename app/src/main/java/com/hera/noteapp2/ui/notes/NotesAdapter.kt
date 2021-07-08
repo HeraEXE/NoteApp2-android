@@ -17,6 +17,13 @@ class NotesAdapter(
 
 
 
+    interface Listener {
+
+        fun onNoteClick(note: Note, position: Int)
+    }
+
+
+
     inner class ViewHolder(private val binding: ItemNoteBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
@@ -56,11 +63,4 @@ class NotesAdapter(
 
 
     override fun getItemCount() = differ.currentList.size
-
-
-
-    interface Listener {
-
-        fun onNoteClick(note: Note, position: Int)
-    }
 }

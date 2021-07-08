@@ -37,7 +37,7 @@
                 android:background="@drawable/background_edit_text"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="8dp"
-                android:padding="2dp"
+                android:padding="4dp"
                 android:inputType="textMultiLine"/>
 
             <TextView
@@ -81,7 +81,7 @@
                 android:background="@drawable/background_edit_text"
                 android:textSize="16sp"
                 android:layout_marginHorizontal="8dp"
-                android:padding="2dp"
+                android:padding="4dp"
                 android:inputType="textMultiLine"/>
 
 

@@ -1,11 +1,7 @@
 package com.hera.noteapp2.ui
 
-import android.app.Activity
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -22,7 +18,6 @@ class NoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
-
         navController = findNavController(R.id.fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
     }

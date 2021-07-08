@@ -16,6 +16,7 @@ class AddEditNoteViewModel @Inject constructor(
 
     var addEditStatus = AddEditStatus.ADD
 
+
     fun insert(note: Note) = viewModelScope.launch {
         repository.insert(note)
     }

@@ -11,25 +11,22 @@ import java.util.*
 @Parcelize
 @Entity(tableName = "note_table")
 data class Note(
-        var title: String,
-
-        var content: String,
-
-        @ColumnInfo(name = "priority_level")
-        var priorityLevel: Int,
-
-        val date: Long = System.currentTimeMillis(),
-
-        @PrimaryKey(autoGenerate = true)
-        val id: Long = 0
+    var title: String,
+    var content: String,
+    @ColumnInfo(name = "priority_level")
+    var priorityLevel: Int,
+    val date: Long = System.currentTimeMillis(),
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0
 ) : Parcelable {
 
-        val dateFormatted: String get() = getFormattedDate(date)
+    val dateFormatted: String get() = getFormattedDate(date)
 
-        private fun getFormattedDate(date: Long): String {
-                val formatter = SimpleDateFormat("MMMM dd  yyyy")
-                val cal = Calendar.getInstance()
-                cal.timeInMillis = date
-                return formatter.format(cal.time)
-        }
+
+    private fun getFormattedDate(date: Long): String {
+        val formatter = SimpleDateFormat("MMMM dd  yyyy")
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = date
+        return formatter.format(cal.time)
+    }
 }
