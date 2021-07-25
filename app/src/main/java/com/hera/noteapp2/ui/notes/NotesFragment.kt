@@ -63,7 +63,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
             recycler.adapter = adapter
 
             fabAddNote.setOnClickListener {
-                val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment()
+                val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment(title = "Add")
                 findNavController().navigate(action)
             }
         }
@@ -72,12 +72,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
                 adapter.differ.submitList(notes)
             }
         }
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        (activity as AppCompatActivity).supportActionBar?.title = requireContext().getText(R.string.toolbar_title_notes)
     }
 
 
@@ -156,7 +150,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.Listener {
 
 
     override fun onNoteClick(note: Note, position: Int) {
-        val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment(note)
+        val action = NotesFragmentDirections.actionNotesFragmentToAddEditNoteFragment(note = note, title = "Edit")
         findNavController().navigate(action)
     }
 

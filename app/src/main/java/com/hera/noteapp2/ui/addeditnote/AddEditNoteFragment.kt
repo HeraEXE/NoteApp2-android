@@ -35,10 +35,7 @@ class AddEditNoteFragment : Fragment(R.layout.fragment_add_edit_note) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAddEditNoteBinding.bind(view)
-        if (viewModel.addEditStatus == AddEditStatus.ADD) {
-            (activity as AppCompatActivity).supportActionBar?.title = requireContext().getText(R.string.toolbar_title_add)
-        } else {
-            (activity as AppCompatActivity).supportActionBar?.title = requireContext().getText(R.string.toolbar_title_edit)
+        if (viewModel.addEditStatus == AddEditStatus.EDIT) {
             binding.apply {
                 val note = args.note!!
                 etTitle.setText(note.title)
